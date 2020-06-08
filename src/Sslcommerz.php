@@ -10,9 +10,15 @@ class Sslcommerz{
     private $tnx;
     private $airTicket = [];
     private $emi = false;
+    private $sslHost;
 
     public function __construct()
     {
+        if (config('sslcommerz.sandbox_mode') === 'sandbox') {
+            $this->sslHost = "https://sandbox.sslcommerz.com/";
+        }else{
+            $this->sslHost = "https://securepay.sslcommerz.com/";
+        }
 
     }
 
@@ -101,7 +107,7 @@ class Sslcommerz{
         }
 
         $http = new Client([
-            'base_uri' => 'https://sandbox.sslcommerz.com/',
+            'base_uri' => $this->sslHost,
         ]);
 
         $response = $http->post('gwprocess/v4/api.php',[
@@ -109,13 +115,6 @@ class Sslcommerz{
         ]);
 
         $body = json_decode($response->getBody());
-
-        $response2 = $http->get('validator/api/merchantTransIDvalidationAPI.php',[
-            'sessionkey' => 'A217BAE3045C599323850C882DD583F4',
-            'store_id' => config('sslcommerz.store_id'),
-            'store_passwd' => config('sslcommerz.store_password'),
-        ]);
-        $body2 = json_decode($response2->getBody());
         // return $body->redirectGatewayURL;
         return $body;
 
@@ -124,7 +123,7 @@ class Sslcommerz{
     public function validate($request)
     {
         $http = new Client([
-            'base_uri' => 'https://sandbox.sslcommerz.com/',
+            'base_uri' => $this->sslHost,
         ]);
 
         $response = $http->get('validator/api/merchantTransIDvalidationAPI.php',[
