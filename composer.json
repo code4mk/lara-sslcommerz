@@ -1,0 +1,36 @@
+{
+  "name": "code4mk/lara-sslcommerz",
+  "description": "Laravel sslcommerz payment package",
+  "keywords": [
+    "sslcommerz",
+    "sslcommerz-payment",
+    "code4mk",
+  ],
+  "homepage": "https://github.com/code4mk/lara-sslcommerz",
+  "support": {
+    "issues": "https://github.com/code4mk/lara-sslcommerz/issues",
+    "source": "https://github.com/code4mk/lara-sslcommerz"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "code4mk",
+      "email": "hiremostafa@gmail.com",
+      "website": "https://code4mk.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Code4mk\\Sslcommerz\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+        "providers": [
+            "Code4mk\\Sslcommerz\\SslcommerzServiceProvider"
+        ]
+    }
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}
