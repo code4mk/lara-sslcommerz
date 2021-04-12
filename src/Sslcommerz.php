@@ -12,6 +12,16 @@ class Sslcommerz{
     private $emi = false;
     private $sslHost;
 
+    private $customerData = [
+        'cus_name'     => 'kamal',
+        'cus_email'    => 'no@no.com',
+        'cus_phone'    => '01000000000',
+        'cus_add1'     => 'dhaka',
+        'cus_city'     => 'Dhaka',
+        'cus_postcode' => '1210',
+        'cus_country'  => 'Bangladesh',
+    ];
+
     public function __construct()
     {
         if (config('sslcommerz.sandbox_mode') === 'sandbox') {
@@ -49,18 +59,18 @@ class Sslcommerz{
         return $this;
     }
 
-    public function customer($name,$email,$add1,$city,$post_code,$country,$phone){
-        $data['cus_name'] = $name;
-        $data['cus_email'] = $email;
-        $data['cus_add1'] = $add1;
-        $data['cus_city'] = $city;
-        $data['cus_postcode'] = $postcode;
-        $data['cus_country'] = $country;
-        $data['cus_phone'] = $phone;
+    public function customer($name = '', $email = '', $phone = '', $add1 = '', $city = '', $post_code = '', $country = ''){
+        $this->customerData['cus_name'] = $name == '' ? $this->customerData['cus_name'] : $name;
+        $this->customerData['cus_email'] = $email == '' ? $this->customerData['cus_email'] : $email;
+        $this->customerData['cus_phone'] = $phone == '' ? $this->customerData['cus_phone'] : $phone;
+        $this->customerData['cus_add1'] = $add1 == '' ? $this->customerData['cus_name'] : $add1;
+        $this->customerData['cus_city'] = $city == '' ? $this->customerData['cus_city'] : $city;
+        $this->customerData['cus_postcode'] = $post_code == '' ? $this->customerData['cus_name'] : $post_code;
+        $this->customerData['cus_country'] = $country == '' ? $this->customerData['cus_name'] : $country;
+        return $this;
     }
 
-
-    public function getSession()
+    public function getRedirectUrl()
     {
         $data = [
             'store_id'=> config('sslcommerz.store_id'),
@@ -72,27 +82,17 @@ class Sslcommerz{
             'fail_url'=> config('sslcommerz.fail_url'),
             'cancel_url'=> config('sslcommerz.cancel_url'),
             'ipn_url' => config('sslcommerz.ipn_url'),
-            'cus_name'=> 'kamal',
-            'cus_email'=> 'kamal@gmail.com',
-            'cus_add1'=> 'dhaka',
-            'cus_add2'=>'dhaka',
-            'cus_city'=>'dhaka',
-            'cus_state'=>'dhaka',
-            'cus_postcode'=>'302',
-            'cus_country'=>'Bangladesh',
-            'cus_phone'=>'01711111111',
-            'cus_fax'=>'01711111111',
-            'product_name' => 'kamal',
-            'product_category' => 'phone',
+            'cus_name'=> $this->customerData['cus_name'],
+            'cus_email'=> $this->customerData['cus_email'],
+            'cus_add1'=> $this->customerData['cus_add1'],
+            'cus_city'=> $this->customerData['cus_city'],
+            'cus_postcode'=> $this->customerData['cus_postcode'],
+            'cus_country'=> $this->customerData['cus_country'],
+            'cus_phone'=> $this->customerData['cus_phone'],
+            'product_name' => 'ecom',
+            'product_category' => 'ecom',
             'product_profile' => 'general',
             'shipping_method' => 'NO',
-            'ship_name'=>'Customer Name',
-            'ship_add1' =>'Dhaka',
-            'ship_add2'=>'Dhaka',
-            'ship_city'=>'Dhaka',
-            'ship_state'=>'Dhaka',
-            'ship_postcode'=>'1000',
-            'ship_country'=>'Bangladesh',
             'multi_card_name'=>'mastercard,visacard,amexcard',
             'value_a'=>'ref001_A',
             'value_b'=>'ref002_B',
@@ -120,7 +120,7 @@ class Sslcommerz{
 
     }
 
-    public function validate($request)
+    public function verify($request)
     {
         $http = new Client([
             'base_uri' => $this->sslHost,
