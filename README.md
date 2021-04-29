@@ -1,5 +1,8 @@
-<p align="center" ><img src="https://raw.githubusercontent.com/code4mk/lara-nagad/master/ssl.png"></p
+<p align="center" ><img src="https://raw.githubusercontent.com/code4mk/lara-sslcommerz/master/ssl.PNG"></p
 
+# SSLcommerz
+
+Sslcomers is the Bangladeshi most favorite payment gateway.
 
 # Installation
 
