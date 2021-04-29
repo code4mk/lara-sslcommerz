@@ -39,6 +39,8 @@ SSLCOMMERZ_MODE=sandbox
 # Get Redirect url
 
 ```php
+use SslPayment;
+
 $data = SslPayment::tnx(2)
           ->customer('kamal212')
           ->amount(100)
@@ -63,6 +65,7 @@ if( $data->failedreason == "") {
 # verify payment (`post method`)
 
 ```php
+use SslPayment;
 $data = SslPayment::verify(request());
 // return response()->json($data);
 if ($data->status == 'VALID') {
