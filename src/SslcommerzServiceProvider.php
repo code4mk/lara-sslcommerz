@@ -2,10 +2,14 @@
 
 namespace Code4mk\Sslcommerz;
 
-
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
+/**
+ * Service Provider class
+ * @author code4mk <hiremostafa@gmail.com>
+ */
+ 
 class SslcommerzServiceProvider extends ServiceProvider
 {
   /**
