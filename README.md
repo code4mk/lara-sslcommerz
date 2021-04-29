@@ -1,8 +1,7 @@
 <p align="center" ><img src="https://raw.githubusercontent.com/code4mk/lara-sslcommerz/master/ssl.PNG"></p
 
-# SSLcommerz
 
-Sslcomers is the Bangladeshi most favorite payment gateway.
+SslCommerz is the Bangladeshi most favorite payment gateway.
 
 # Installation
 
@@ -55,6 +54,12 @@ if( $data->failedreason == "") {
 }
 ```
 
+## methods
+
+* emi($max_inst = '',$selected_inst = '',$allow_only = '')
+* customer($name = '', $email = '', $phone = '', $add1 = '', $city = '', $post_code = '', $country = '')
+*
+
 # verify payment (`post method`)
 
 ```php
@@ -64,10 +69,47 @@ if ($data->status == 'VALID') {
     // your business logic
  }
 ```
-#
 
-```bash
-php artisan vendor:publish --provider="Code4mk\SslCommerz\SslcommerzServiceProvider" --tag=config
+#ipn payment verify
+
+create a post route for ipn and csrf free
+
+* [ipn doc sslcommerz](https://developer.sslcommerz.com/doc/v4/#validate-payment-with-ipn)
+
+```php
+/* you can get success objects which triggers by sslcomerz.
+  you can
+*/
+Route::post('ipn',function(){
+  return response()->json(request());
+})
+```
+
+# csrf
+
+* enable csrf free for your success route
+
+ex : (VerifyCsrfToken.php)
+
+```php
+
+namespace App\Http\Middleware;
+
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
+
+class VerifyCsrfToken extends Middleware
+{
+    /**
+     * The URIs that should be excluded from CSRF verification.
+     *
+     * @var array
+     */
+    protected $except = [
+        '/success',
+        '/ipn'
+    ];
+}
+
 ```
 
 # Demo
