@@ -58,7 +58,7 @@ if( $data->failedreason == "") {
 
 * emi($max_inst = '',$selected_inst = '',$allow_only = '')
 * customer($name = '', $email = '', $phone = '', $add1 = '', $city = '', $post_code = '', $country = '')
-*
+
 
 # verify payment (`post method`)
 
@@ -70,7 +70,7 @@ if ($data->status == 'VALID') {
  }
 ```
 
-#ipn payment verify
+# ipn payment verify
 
 create a post route for ipn and csrf free
 
