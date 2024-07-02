@@ -29,8 +29,8 @@ Code4mk\Sslcommerz\SslcommerzServiceProvider::class
 SSLCOMMERZ_STORE_ID=""
 SSLCOMMERZ_STORE_PASSWORD=""
 SSLCOMMERZ_SUCCESS_URL="http://127.0.0.1:8000/success"
-SSLCOMMERZ_FAIL_URL="http://127.0.0.1:8000"
-SSLCOMMERZ_CANCEL_URL="http://127.0.0.1:8000"
+SSLCOMMERZ_FAIL_URL="http://127.0.0.1:3000"
+SSLCOMMERZ_CANCEL_URL="http://127.0.0.1:3000"
 SSLCOMMERZ_MODE=sandbox
 ```
 
@@ -62,7 +62,11 @@ if( $data->failedreason == "") {
 * customer($name = '', $email = '', $phone = '', $add1 = '', $city = '', $post_code = '', $country = '')
 
 
-# verify payment (`post method`)
+# verify payment (`post method`) - success URL
+
+```bash
+http://127.0.0.1:8000/success
+```
 
 ```php
 use SslPayment;
@@ -114,10 +118,6 @@ class VerifyCsrfToken extends Middleware
 }
 
 ```
-
-# Demo
-
-* [Lara sslcommerz Demo](https://github.com/code4mk/lara-sslcommerz-demo)
 
 # Any query
 
